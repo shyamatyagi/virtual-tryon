@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Products - Sea of Sparkles</title>
+    <link rel="stylesheet" href="2.css"> <!-- Assuming your CSS is in a separate file -->
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <img src="images/logo.png" alt="Sea of Sparkles Logo" width="100" height="auto">
+            </div>
+            <nav>
+                <ul id="MenuItems">
+                    <li><a href="shyama.html">Home</a></li>
+                    <li><a href="product.html">Product</a></li>
+                    <li><a href="account.html">Account</a></li>
+                </ul>
+            </nav>
+            <div class="shopping">
+                <a href="shop.html"><img src="images/cart.png" alt="Shopping Cart" width="30" height="30"></a>
+                <img src="images/menu.png" alt="Menu" class="menu-icon" onclick="toggleMenu()">
+                <span class="quantity">0</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="sidebar">
+            <div class="head"><p>My Cart</p></div>
+            <div id="cartItem">Your cart is empty</div>
+            <div class="foot">
+                <h3>Total</h3>
+                <h2 id="total">$0.00</h2>
+            </div>
+        </div>
+
+        <div id="root"></div>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>Download Our App</h3>
+                    <p>Download our app for Android and iOS mobile phones</p>
+                    <div class="app-logos">
+                        <img src="images/play-store.png" alt="Play Store">
+                        <img src="images/app-store.png" alt="App Store">
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Our Purpose</h3>
+                    <p>Our purpose is to make fashion accessories virtual try-on effective and shopping easier for everyone.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Useful Links</h3>
+                    <ul>
+                        <li>Coupons</li>
+                        <li>Blog Post</li>
+                        <li>Return Policy</li>
+                        <li>Join Affiliate</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Follow Us On</h3>
+                    <ul>
+                        <li>Instagram</li>
+                        <li>Facebook</li>
+                        <li>Twitter</li>
+                        <li>YouTube</li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <p class="copyright">Copyright 2023 - Mini Project</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            var MenuItems = document.getElementById("MenuItems");
+            MenuItems.style.maxHeight = MenuItems.style.maxHeight === "0px" ? "200px" : "0px";
+        }
+    </script>
+</body>
+</html>

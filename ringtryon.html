@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ring Try-On</title>
+  <style>
+    body {
+      background-color: #f0f0f0;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    #video-container {
+      position: relative;
+      width: 780px;
+      height: 780px;
+    }
+    video, canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+    }
+    #product-list {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      z-index: 3;
+    }
+    .product {
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+    #controls {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(255,255,255,0.8);
+      padding: 10px;
+      border-radius: 10px;
+      z-index: 3;
+    }
+    #add-to-cart, #upload {
+      position: fixed;
+      bottom: 20px;
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      z-index: 3;
+    }
+    #add-to-cart { left: 20px; }
+    #upload { left: 150px; }
+  </style>
+
+  <!-- MediaPipe & Camera Utils -->
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+</head>
+<body>
+
+<div id="video-container">
+  <video id="video" width="780" height="780" autoplay muted playsinline></video>
+  <canvas id="overlay" width="780" height="780"></canvas>
+</div>
+
+<div id="product-list">
+  <div class="product">
+    <img src="images/org22145_2_sdckuurspfo8lig3-removebg-preview.png" alt="Product 1" width="100">
+  </div>
+  <div class="product">
+    <img src="images/LR01302R-6_108-removebg-preview.png" alt="Product 2" width="100">
+  </div>
+  <div class="product">
+    <img src="images/JR04192-YGP6EB_11_listfront-removebg-preview.png" alt="Product 3" width="100">
+  </div>
+  <div class="product">
+    <img src="images/JR06994-YGP900_1_lar-removebg-preview.png" alt="Product 4" width="100">
+  </div>
+  <div class="product">
+    <img src="images/images-removebg-preview (1).png" alt="Product 5" width="100">
+  </div>
+  <div class="product">
+    <img src="images/ring23-removebg-preview (1).png" alt="Product 6" width="100">
+  </div>
+</div>
+
+<div id="controls">
+  <label for="ring-size">Ring Size:</label>
+  <input type="range" id="ring-size" min="30" max="200" value="100">
+</div>
+
+<button id="add-to-cart">Add to Cart</button>
+<button id="upload">Upload</button>
+
+<script>
+  const videoElement = document.getElementById('video');
+  const canvasElement = document.getElementById('overlay');
+  const canvasCtx = canvasElement.getContext('2d');
+  const ringImg = new Image();
+  ringImg.src = "images/ring23-removebg-preview (1).png"; // Default ring image
+
+  let ringSize = 100;
+
+  // Resize slider
+  document.getElementById('ring-size').addEventListener('input', function () {
+    ringSize = parseInt(this.value);
+  });
+
+  // Product change
+  document.querySelectorAll('.product img').forEach(product => {
+    product.addEventListener('click', () => {
+      ringImg.src = product.src;
+    });
+  });
+
+  // MediaPipe Hands
+  const hands = new Hands({
+    locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`,
+  });
+
+  hands.setOptions({
+    maxNumHands: 1,
+    modelComplexity: 1,
+    minDetectionConfidence: 0.7,
+    minTrackingConfidence: 0.7
+  });
+
+  hands.onResults((results) => {
+
+  canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+
+  if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
+    for (let i = 0; i < results.multiHandLandmarks.length; i++) {
+      const hand = results.multiHandLandmarks[i];
+      const handedness = results.multiHandedness[i].label; // "Left" or "Right"
+
+      // Ring finger base is landmark 13
+      const ringBase = hand[13];
+      const x = ringBase.x * canvasElement.width;
+      const y = ringBase.y * canvasElement.height;
+
+      canvasCtx.drawImage(ringImg, x - ringSize / 2, y - ringSize / 2 - 15, ringSize, ringSize);
+
+    }
+  }
+});
+
+
+  // Setup camera
+  const camera = new Camera(videoElement, {
+    onFrame: async () => {
+      await hands.send({ image: videoElement });
+    },
+    width: 780,
+    height: 780
+  });
+  camera.start();
+
+  // Navigation
+  document.getElementById('add-to-cart').addEventListener('click', () => {
+    window.location.href = 'destination_page.html';
+  });
+
+  document.getElementById('upload').addEventListener('click', () => {
+    window.location.href = 'upload.html';
+  });
+</script>
+
+</body>
+</html>

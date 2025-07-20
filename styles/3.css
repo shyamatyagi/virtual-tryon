@@ -1,0 +1,128 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box ;
+   }
+   body{
+       font-family: 'Poppins', sans-serif;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       min-height: 100vh;
+   background: url('background.jpeg') no-repeat;
+       background-size: cover;
+       background-position: center;
+   }
+   header{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 20px 100px;
+    background: rgba(224, 171, 218, 0.945);
+    display: flex;
+    justify-content: space-between;
+
+   }
+   .navigation a{
+    position: relative;
+    font-size: 1.1em;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 40px;
+   }
+   .navigation a::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 3px;
+    background: #fff;
+    border-radius: 5px;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform .5s;
+
+   }
+   .navigation a:hover::after{
+    transform-origin: left;
+    transform: scaleX(1);
+   }
+
+   .navigation .btnLogin-popup{
+    width: 130px;
+    height: 50px;
+    background: transparent;
+    border: 2px solid #fff;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1em;
+    color: #fff;
+    font-weight: 500;
+    margin-left: 40px;
+    transition: .5s;
+   }
+   .navigation .btnLogin-popup:hover{
+    background-color: #fff;
+    color: #162916;
+   }
+   .wrapper{
+    position: relative;
+    width: 450px;
+    height: 450px;
+    background: transparent;
+    border: 2px solid rgba(224, 171, 218, 0.945);
+    border-radius: 20px;
+    backdrop-filter: blur(2px);
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   }
+   .wrapper .form-box{
+    width: 100%;
+    padding: 40px;
+   }
+   .form-box h2{
+    font-size: 2em;
+    color: #162916;
+    text-align: center;
+   }
+   .input-box{
+    position: relative;
+    height: 100%;
+    height: 35px;
+    border-bottom: 2px solid #162916;
+    margin: 30px 0;
+   }
+   .input-box label{
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateX(-50%);
+    font-size: 1em;
+    color: #162916;
+    font-weight: 500;
+    pointer-events: none;
+    transition: .5s;
+   }
+   .input-box input:focus~lable,
+   .input-box valid:focus~lable{
+    top: -5px;
+   }
+   .input-box input{
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+   }
+   .input-box .icon{
+    position: absolute;
+    right: 8px;
+    font-size: 1.2em;
+    color: #162916;
+    line-height: 57px;
+   }

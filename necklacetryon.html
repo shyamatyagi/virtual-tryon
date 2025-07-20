@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Necklace Try-On</title>
+  <style>
+    body {
+      background-color: #f0f0f0;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    #video-container {
+      position: relative;
+      width: 780px;
+      height: 780px;
+    }
+    video, canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+    }
+    #product-list {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      z-index: 3;
+    }
+    .product {
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+    #controls {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 10px;
+      border-radius: 10px;
+      z-index: 3;
+    }
+    #add-to-cart {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      z-index: 3;
+    }
+  </style>
+
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+</head>
+<body>
+
+<div id="video-container">
+  <video id="video" width="780" height="780" autoplay muted playsinline></video>
+  <canvas id="overlay" width="780" height="780"></canvas>
+</div>
+
+<div id="product-list">
+  <div class="product">
+    <img src="images/neckalce45.png" alt="Product 1" width="100">
+  </div>
+  <div class="product">
+    <img src="images/e1ba0e389f9841de4141949cb8cec21a-removebg-preview.png" alt="Product 2" width="100">
+  </div>
+  <div class="product">
+    <img src="images/diamond.png" alt="Product 3" width="100">
+  </div>
+  <div class="product">
+    <img src="images/product13.png" alt="Product 4" width="100">
+  </div>
+  <div class="product">
+    <img src="images/c2fbf86ea140266a703e00d12cbdac09-removebg-preview.png" alt="Product 5" width="100">
+  </div>
+</div>
+
+<div id="controls">
+  <label for="necklace-size">Necklace Size:</label>
+  <input type="range" id="necklace-size" min="50" max="400" value="200">
+</div>
+
+<button id="add-to-cart">Add to Cart</button>
+
+<script>
+  const videoElement = document.getElementById('video');
+  const canvasElement = document.getElementById('overlay');
+  const canvasCtx = canvasElement.getContext('2d');
+  const necklaceImg = new Image();
+  necklaceImg.src = "images/product13.png";
+
+  let necklaceSize = 200; // initial size
+
+  // Resize control
+  document.getElementById('necklace-size').addEventListener('input', function () {
+    necklaceSize = parseInt(this.value);
+  });
+
+  // Setup MediaPipe FaceMesh
+  const faceMesh = new FaceMesh({
+    locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/${file}`
+  });
+
+  faceMesh.setOptions({
+    maxNumFaces: 1,
+    refineLandmarks: true,
+    minDetectionConfidence: 0.5,
+    minTrackingConfidence: 0.5
+  });
+
+  faceMesh.onResults(results => {
+    canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+    if (results.multiFaceLandmarks.length > 0) {
+      const landmarks = results.multiFaceLandmarks[0];
+
+      const chin = landmarks[152];
+      const x = chin.x * canvasElement.width;
+      const y = chin.y * canvasElement.height;
+
+      const width = necklaceSize;
+      const height = necklaceSize * 0.6; // height ratio
+
+      canvasCtx.drawImage(necklaceImg, x - width / 2, y + 10, width, height);
+    }
+  });
+
+  const camera = new Camera(videoElement, {
+    onFrame: async () => {
+      await faceMesh.send({ image: videoElement });
+    },
+    width: 780,
+    height: 780
+  });
+  camera.start();
+
+  // Product selection
+  document.querySelectorAll('.product img').forEach(product => {
+    product.addEventListener('click', () => {
+      necklaceImg.src = product.src;
+    });
+  });
+
+  // Redirect on Add to Cart
+  document.getElementById('add-to-cart').addEventListener('click', () => {
+    window.location.href = 'addtocart.html';
+  });
+</script>
+
+</body>
+</html>

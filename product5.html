@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="2.css">
+  <title> All Product-Sea of Sparkles</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css">
+        </head>
+        <style>
+            .jewelry-image-container {
+                position: relative;
+                width: 300px; /* Set the desired width of the image container */
+            }
+    
+            .jewelry-image {
+                display: block;
+                width: 100%;
+                transition: transform 0.2s;
+            }
+            </style>
+        <body>
+
+
+
+ <div class="container">
+                <div class="navbar">
+                    <div class="logo">
+                       <a href="shyama.html"><img src="images/logo.png" width="200px"></a>
+                    </div>
+                    <nav>
+                       <ul id="MenuItems"> 
+                           <li><a href="shyama.html">Home</a></li>
+                           <li><a href="product.html">Product</a></li>
+                          
+                           <li><a href="account.html">Account</a></li>
+   
+                       </ul>
+                    </nav>
+                   <a href="shop.html"><img src="images/cart.png" width="=30px" height="30px"></a>
+                    <img src="images/menu.png" class="menu-icon" 
+                    onclick="menutoggle()">
+               </div>
+       
+            </div>
+
+            <!--product3-->
+            <div class="small-container single-product">
+                <div class="row">
+                <div class="col-2">
+                    <img src="images/images (3).jpeg" width=90% id="ProductImg">
+                    <div class="small-img-row">
+
+                   
+                
+           
+                </div>
+                </div>
+                <div class="col-2">
+                    <p>Home/Rings</p>
+                    <h1> Green Gem Ring</h1>
+                    <h4>₹579</h4>
+                    <select>
+                        <option>select size</option>
+                        <option>one size</option>
+                    </select>
+                    <br>
+                    <input type="number" value="1" min="1" onchange="updatePrice(this)">
+                    <a href="addtocart.html" class="btn">Add to Cart</a>
+                    <a href="ringtryon.html" class="btn">try on</a>
+                    <h3>product details </h3>
+                    <br>
+                    <p>this jewelery consist of a ring has intricate texture detail,secured with a S-hook closure. </p>
+                     <p>Warranty: 1 month </p>
+                     <p> Warranty provided by brand.</p>
+                      <p> disclamer: product color may vary slightly vary due to phtographic lighting</p>
+                     
+                </div>
+  </div>
+            </div>
+            <!----titl---->
+            <div class="small-container">
+                <div class="row row-2">
+                    <h2>related products</h2>
+                    <a href="product2.html" class="btn"><p>view more</p></a>
+                </div>
+            </div>
+
+       <!----products--->
+         <div class="small-container">
+                <div class="row">
+                    <div class="col-4">
+                        <img src="images/ring22.webp">
+                        <h4>green pearl necklace</h4>
+                       
+                        <p>₹579 </p>
+                    </div>
+                   
+                    <div class="col-4">
+                        <img src="images/JR04192-YGP6EB_11_listfront-removebg-preview.png">
+                        <h4>bleack pearl necklace</h4>
+                    
+                        <p>₹450 </p>
+                    </div>
+                    <div class="col-4">
+                        <img src="images/JR06994-YGP900_1_lar-removebg-preview.png">
+                        <h4> studded earrings</h4>
+                        
+                        <p>₹1000 </p>
+                    </div>
+                    </div>
+                </div>
+            </div>
+           
+</div>
+
+              <!------fotter---->
+            <div class="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="footer-col-1">
+                            <h3>Download app</h3>
+                            <p>Dowload our app for android and ios mobile phone </p>
+                            <div class="app logo">
+                                <img src="images/play-store.png">
+                                <img src="images/app-store.png">
+                            </div>
+                        </div>
+                        <div class="footer-col-2">
+                            
+                            <p>our purpose is to make fashion acessories virtual try on effective and shopping easier for everyone. see the world.</p>
+                           
+                        </div>
+                        <div class="footer-col-3">
+                            <h3>Useful links</h3>
+                            <ul>
+                                <li>coupons</li>
+                                <li>blog post</li>
+                                <li>return policy</li>
+                                <li>join affiliate</li>
+                            </ul>
+                    </div>
+                    <div class="footer-col-4">
+                        <h3>follow us on </h3>
+                        <ul>
+                            <li>instagram</li>
+                            <li>facebook</li>
+                            <li>twitter</li>
+                            <li>youtube</li>
+                        </ul>
+                    </div>
+                </div>
+                <hr>
+                <p class="copyright">copyright 2023-mini project</p>
+                </div>
+            </div>
+              <!-----is to toggle script---->
+              <script>
+                var MenuItems= document.getElementById("MenuItems");
+
+                MenuItems.style.maxHeight = "0px";
+
+                function menutoggle() {
+                    if (MenuItems.style.maxHeight == "0px")
+                    {
+                        MenuItems.style.maxHeight ="200px"
+                    }
+                    else
+                    {
+                        MenuItems.style.maxHeight ="0px"
+                    }
+                }
+              </script>
+              <!----is to get product image-->
+              <script>
+                var ProductImg= document.getElementById("ProductImg")
+                var SmallImg= document.getElementsByClassName("small-img")
+                SmallImg[0].onclick= function()
+                {
+                    ProductImg.src= SmallImg[0].src;
+
+
+                }
+                SmallImg[1].onclick= function()
+                {
+                    ProductImg.src= SmallImg[1].src;
+
+                }
+                SmallImg[2].onclick= function()
+                {
+                    ProductImg.src= SmallImg[2].src;
+
+                }
+                SmallImg[3].onclick= function()
+                {
+                    ProductImg.src= SmallImg[3].src;
+
+                }
+              </script>
+        </body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="2.css">
+  <title> All Product-Sea of Sparkles</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css">
+        </head>
+        <body>
+        
+ <div class="container">
+                <div class="navbar">
+                   <a href="shyama.html"> <div class="logo"></a>
+                      <img src="images/logo.png" width="200px">
+                    </div>
+                    <nav>
+                       <ul id="MenuItems"> 
+                           <li><a href="shyama.html">Home</a></li>
+                           <li><a href="product.html">Product</a></li>
+                           <li><a href="">About</a></li>
+                           <li><a href="">Contact</a></li>
+                           <li><a href="account.html">Account</a></li>
+   
+                       </ul>
+                    </nav>
+                   <a href="shop.html"><img src="images/cart.png" width="=30px" height="30px"></a>
+                    <img src="images/menu.png" class="menu-icon" 
+                    onclick="menutoggle()">
+               </div>
+       
+            </div>
+            <!---account-page----->
+            <div class="account-page">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-2">
+                            <img src="images/image1.webp">
+                        </div>
+                        <div class="col-2">
+                            <div class="container">
+                                <div class="form-container">
+                                    <div class="form-btn">
+                                        <span onclick="login()">login</span>
+                                        <span onclick="register()">register</span>
+                                        <hr id="indicator">
+                                    </div>
+                                    <form id="loginform" action="login.php" method="POST">
+                                        <!-- Your form fields here -->
+                                        <h4>username</h4>
+                                        <div class="username-input">
+                                            <i class="fa fa-user"></i>
+                                            <input type="text" placeholder="type your username" name="username">
+                                        </div>
+                                        <h4>password</h4>
+                                        <div class="password">
+                                            <i class="fa fa-lock"></i>
+                                            <input type="password" placeholder="type your password" name="password">
+                                        </div>
+                                        <!-- Add a submit button for login -->
+                                        <button type="submit" class="btn" name="login_btn">login</button>
+                                        <a href=""><br>forgot password</a>
+                                    </form>
+                                    
+                                    <form id="Regform" action="register.php" method="POST">
+                                        <!-- Your form fields here -->
+                                        <input type="text" placeholder="username" name="username">
+                                        <input type="email" placeholder="email" name="email">
+                                        <input type="password" placeholder="password" name="password">
+                                        <!-- Add a submit button for registration -->
+                                        <button type="submit" class="btn" name="register_btn">register</button>
+                                    </form>                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         <script>
+            function account(){
+                var email= document.getElementById("email").value;
+                var password=document.getElementById("password").value;
+                if(email!="admin@gmail.com"&& password!="admin123"){
+                    window.location.assign("shyama.html");
+                    alert("login sucessfull");
+                }
+                else{
+                    alert("invalid information");
+                    
+                }
+
+            }
+
+         </script>
+              <!------fotter---->
+            <div class="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="footer-col-1">
+                            <h3>Download app</h3>
+                            <p>Dowload our app for android and ios mobile phone </p>
+                            <div class="app logo">
+                                <img src="images/play-store.png">
+                                <img src="images/app-store.png">
+                            </div>
+                        </div>
+                        <div class="footer-col-2">
+                            
+                            <p>our purpose is to make fashion acessories virtual try on effective and shopping easier for everyone. see the world.</p>
+                           
+                        </div>
+                        <div class="footer-col-3">
+                            <h3>Useful links</h3>
+                            <ul>
+                                <li>coupons</li>
+                                <li>blog post</li>
+                                <li>return policy</li>
+                                <li>join affiliate</li>
+                            </ul>
+                    </div>
+                    <div class="footer-col-4">
+                        <h3>follow us on </h3>
+                        <ul>
+                            <li>instagram</li>
+                            <li>facebook</li>
+                            <li>twitter</li>
+                            <li>youtube</li>
+                        </ul>
+                    </div>
+                </div>
+                <hr>
+                <p class="copyright">copyright 2023-mini project</p>
+                </div>
+            </div>
+              <!-----is to toggle script---->
+              <script>
+                var MenuItems= document.getElementById("MenuItems");
+
+                MenuItems.style.maxHeight = "0px";
+
+                function menutoggle() {
+                    if (MenuItems.style.maxHeight == "0px")
+                    {
+                        MenuItems.style.maxHeight ="200px"
+                    }
+                    else
+                    {
+                        MenuItems.style.maxHeight ="0px"
+                    }
+                }
+              </script>
+              <!----js for toggle-->
+              <script>
+                var Loginform=document.getElementById("loginform");
+                var Regform= document.getElementById("Regform");
+                var Indicator= document.getElementById("indicator")
+                function register(){
+
+               
+                Regform.style.transform="translateX(0px)";
+                loginform.style.transform="translateX(0px)";
+                Indicator.style.transform="translateX(100px)";
+                
+                }
+                function login(){
+
+               
+Regform.style.transform="translateX(300px)";
+loginform.style.transform="translateX(300px)";
+indicator.style.transform="translateX(0px)";
+
+}
+
+              </script>
+              
+        </body>
+</html>

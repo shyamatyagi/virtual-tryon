@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="2.css">
+    <title>Jewelry Try-On</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        #webcam-feed {
+            width: 50%;
+            height: 100%;
+            position: center;
+            top: 0;
+            left: 0;
+        }
+        #jewelry-image {
+            width: 150px; /* Initial size of the jewelry image */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        #product-list {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    
+    <video id="webcam-feed" autoplay></video>
+    <img id="jewelry-image" src="images/product13.png" alt="Selected Jewelry">
+    
+    <div id="product-list">
+    <!-- Display other products from the previous page here -->
+    <div class="product">
+        <img src="images/KNA905-removebg-preview.png" alt="Product 1" width="150" height="auto">
+        <p>Product 1</p>
+    </div>
+    <div class="product">
+        <img src="images/vaibhav-jewellers-22k-gold-signity-choker-5vg7438-5vg7438-removebg-preview.png" alt="Product 2" width="150" height="auto">
+        <p>Product 2</p>
+    </div>
+    <div class="product">
+        <img src="images/product13.png" alt="Product 2" width="150" height="auto">
+        <p>Product 3</p>
+    </div>
+    
+    <script>
+        const jewelryImages = [
+    'images/KNA905-removebg-preview.png',
+    'images/vaibhav-jewellers-22k-gold-signity-choker-5vg7438-5vg7438-removebg-preview.png',
+    'images/product13.png'
+    ];
+        // Function to set up the webcam
+        async function setupWebcam() {
+            const webcamFeed = document.getElementById('webcam-feed');
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                webcamFeed.srcObject = stream;
+            } catch (error) {
+                console.error('Error accessing webcam:', error);
+            }
+        }
+        
+        setupWebcam();
+        
+        // Function to make the jewelry image draggable and zoomable
+        const jewelryImage = document.getElementById('jewelry-image');
+        let isDragging = false;
+        let offsetX, offsetY;
+        let currentScale = 1;
+        
+        jewelryImage.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            offsetX = e.clientX - jewelryImage.getBoundingClientRect().left;
+            offsetY = e.clientY - jewelryImage.getBoundingClientRect().top;
+        });
+        
+        document.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+                jewelryImage.style.left = e.clientX - offsetX + 'px';
+                jewelryImage.style.top = e.clientY - offsetY + 'px';
+            }
+        });
+        
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+        
+        // Function to zoom in and out the jewelry image
+        let zoomLevel = 1;
+        const maxZoom = 2; // Maximum zoom level
+        
+        document.addEventListener('wheel', (e) => {
+            if (e.deltaY > 0) {
+                zoomLevel = Math.min(zoomLevel + 0.1, maxZoom);
+            } else {
+                zoomLevel = Math.max(zoomLevel - 0.1, 1);
+            }
+            jewelryImage.style.transform = `translate(-50%, -50%) scale(${zoomLevel})`;
+        });
+        const productImages = document.querySelectorAll('.product');
+
+        productImages.forEach((image, index) => {
+        image.addEventListener('click', () => {
+            if (index < jewelryImages.length) {
+                // Change the jewelry image source based on the clicked product
+                jewelryImage.src = jewelryImages[index];
+            }
+        });
+    });
+    </script>
+</body>
+</html>

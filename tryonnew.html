@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Place Your Hand Around the Outline</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f0f0;
+    }
+    #hand-guide {
+        position: relative;
+    }
+    #hand-outline {
+        position: absolute;
+        top:50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        pointer-events: none; /* Ensure that mouse events pass through the outline */
+        width: 500px; /* Fixed width for the hand outline */
+        height: auto; /* Height will adjust according to aspect ratio */
+    }
+    #video {
+        display: block; /* Display the video initially */
+        width: 80%; /* Adjust width as needed */
+        max-width: 800px; /* Limiting the maximum width of the video */
+        border: 2px solid #000;
+        border-radius: 8px;
+    }
+    #capture-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+    }
+    #product-list {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        list-style-type: none;
+        z-index: 999; /* Ensure the product list is on top */
+    }
+</style>
+</head>
+<body>
+<div id="hand-guide">
+    <ul id="product-list">
+        <li>Product 1</li>
+        <li>Product 2</li>
+        <li>Product 3</li>
+    </ul>
+    <video id="video" autoplay></video> <!-- Video element for webcam feed -->
+    <img id="hand-outline" src="images/semifinal.png" alt="Hand Outline">
+    <button id="capture-btn">Take Pic</button>
+</div>
+
+<script>
+    // Get video element
+    var video = document.getElementById('video');
+    // Get hand outline element
+    var handOutline = document.getElementById('hand-outline');
+    // Get capture button
+    var captureBtn = document.getElementById('capture-btn');
+    // Get product list element
+    var productList = document.getElementById('product-list');
+
+    // Access webcam
+    navigator.mediaDevices.getUserMedia({ video: true })
+    .then(function(stream) {
+        // Display webcam feed in the video element
+        video.srcObject = stream;
+    })
+    .catch(function(err) {
+        console.error('Error accessing webcam: ', err);
+    });
+
+    // Update hand outline position based on video dimensions
+    video.onloadedmetadata = function() {
+        handOutline.style.width = '500px'; // Fixed width for hand outline
+        handOutline.style.height = 'auto'; // Height will adjust according to aspect ratio
+    };
+
+    // Click event handler for capture button
+    captureBtn.addEventListener('click', function() {
+        // Capture the image (e.g., you can use canvas)
+        var canvas = document.createElement('canvas');
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        var ctx = canvas.getContext('2d');
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        var imageDataURL = canvas.toDataURL('image/png');
+        // Display the captured image
+        video.style.display = 'none'; // Hide the video element
+        handOutline.src = imageDataURL; // Set the captured image as the source of the hand outline
+        handOutline.style.display = 'block'; // Show the hand outline
+        productList.style.display = 'none'; // Hide the product list
+    });
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

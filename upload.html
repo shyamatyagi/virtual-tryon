@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resizable and Movable Ring</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    #ring-container {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+    }
+
+    #ring {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+    }
+
+    #ring img {
+        width: 100%;
+        height: 100%;
+    }
+
+    #upload-container {
+        position: absolute;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+    }
+
+    #upload-input {
+        display: block;
+        margin: 0 auto;
+    }
+
+    #controls {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #controls input {
+        margin-bottom: 10px;
+    }
+    #product-list {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  .product {
+    margin-bottom: 10px;
+    cursor: pointer; /* Add cursor pointer to indicate clickable */
+  }
+</style>
+</head>
+<body>
+
+    <div id="ring-container">
+        <div id="upload-container">
+            <h2>Upload Image</h2>
+            <input type="file" id="upload-input" accept="image/*">
+        </div>
+        <img id="ring" src="images/ring23-removebg-preview (1).png" alt="Ring">
+    </div>
+    <div id="controls">
+        <label for="size">Size:</label>
+        <input type="range" id="size" min="50" max="300" value="100">
+        <label for="horizontal">Horizontal Position:</label>
+        <input type="range" id="horizontal" min="0" max="1000" value="200">
+        <label for="vertical">Vertical Position:</label>
+        <input type="range" id="vertical" min="0" max="900" value="150">
+    </div>
+    
+<div id="product-list">
+    <div class="product" onclick="changeRingImage('images/JR06994-YGP900_1_lar-removebg-preview.png')">
+      <img src="images/JR06994-YGP900_1_lar-removebg-preview.png" alt="Product 1" width="50">
+    </div>
+    <div class="product" onclick="changeRingImage('images/JR04192-YGP6EB_11_listfront-removebg-preview.png')">
+      <img src="images/JR04192-YGP6EB_11_listfront-removebg-preview.png" alt="Product 2" width="50">
+    </div>
+    <div class="product" onclick="changeRingImage('images/ring23-removebg-preview (1).png')">
+      <img src="images/ring23-removebg-preview (1).png" alt="Product 3" width="50">
+    </div>
+    <div class="product" onclick="changeRingImage('images/images-removebg-preview (1).png')">
+      <img src="images/images-removebg-preview (1).png" alt="Product 4" width="50">
+    </div>
+</div>
+
+<script>
+    // Function to resize the ring
+    var sizeInput = document.getElementById('size');
+    var horizontalInput = document.getElementById('horizontal');
+    var verticalInput = document.getElementById('vertical');
+    var ring = document.getElementById('ring');
+
+    sizeInput.addEventListener('input', function() {
+        ring.style.width = this.value + 'px';
+        ring.style.height = this.value + 'px';
+    });
+
+    horizontalInput.addEventListener('input', function() {
+        ring.style.left = this.value + 'px';
+    });
+
+    verticalInput.addEventListener('input', function() {
+        ring.style.top = this.value + 'px';
+    });
+
+    // Function to change the ring image
+    function changeRingImage(imageSrc) {
+        ring.src = imageSrc;
+    }
+
+    // Image upload functionality
+    document.getElementById('upload-input').addEventListener('change', function(event) {
+        var file = event.target.files[0];
+        if (!file) return;
+
+        var reader = new FileReader();
+        reader.onload = function(event) {
+            var uploadedImage = new Image();
+            uploadedImage.src = event.target.result;
+
+            uploadedImage.onload = function() {
+                var uploadContainer = document.getElementById('upload-container');
+                uploadContainer.innerHTML = '';
+                uploadContainer.appendChild(uploadedImage);
+
+                // Adjust the ring position to be above the uploaded image
+                var centerX = window.innerWidth / 2 - uploadedImage.width / 2;
+                var centerY = window.innerHeight / 2 - uploadedImage.height / 2;
+                ring.style.top = centerY + 'px';
+                ring.style.left = centerX + 'px';
+            };
+        };
+        reader.readAsDataURL(file);
+    });
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

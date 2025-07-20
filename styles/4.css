@@ -1,0 +1,110 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+#container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+}
+#upload-section, #dashboard-section {
+  width: 30%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+#middle-section {
+  flex-grow: 1;
+  text-align: center;
+}
+#image-display {
+  max-width: 100%;
+  max-height: 80vh;
+}
+.button {
+  display: block;
+  margin-bottom: 10px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+* Style for dropdown */
+.dropdown {
+position: relative;
+display: inline-block;
+}
+
+/* Style for dropdown button */
+.dropdown button {
+  
+background-color: #f1f1f1;
+color: black;
+padding: 10px 20px;
+font-size: 16px;
+border: none;
+cursor: pointer;
+}
+
+/* Style for dropdown content */
+.dropdown-content {
+display: none;
+position: absolute;
+background-color: #f9f9f9;
+min-width: 200px;
+box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+z-index: 1;
+}
+
+/* Style for links in dropdown content */
+.dropdown-content a {
+color: black;
+padding: 12px 16px;
+text-decoration: none;
+display: block;
+}
+
+/* Style for links in dropdown content on hover */
+.dropdown-content a:hover {
+background-color: #f1f1f1;
+}
+
+/* Show dropdown content when hover over dropdown button */
+.dropdown:hover .dropdown-content {
+display: block;
+}
+
+/* Style for image inside dropdown */
+.dropdown-content img {
+width: 100px; /* Adjust width as needed */
+height: auto;
+margin-right: 10px;
+}
+/* Style for the window */
+.window {
+width: 700px; /* Adjust width as needed */
+height: 500px; /* Adjust height as needed */
+background-color: #f1f1f1;
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+padding: 20px;
+box-sizing: border-box;
+
+}
+/* Style for the video element */
+#videoElement {
+width: 96%;
+height: auto;
+display: block;
+}
+/* Style for the image captured */
+#capturedImage {
+width: 100%;
+height: auto;
+display: none;
+}
